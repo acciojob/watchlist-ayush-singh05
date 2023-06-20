@@ -22,7 +22,7 @@ public class MovieController {
     }
 
     @PostMapping("/movies/add-movie-director-pair")
-    public ResponseEntity addMovieDirectorPair(@RequestBody String directorName, @RequestBody String movieName) {
+    public ResponseEntity addMovieDirectorPair(@RequestParam("Dirname") String directorName, @RequestParam("movieN") String movieName) {
         return new ResponseEntity(ms.addMovieDirectorPair(directorName,movieName),HttpStatus.ACCEPTED);
     }
 
@@ -37,7 +37,8 @@ public class MovieController {
     }
 
     @GetMapping("/movies/get-movies-by-director-name/{director}")
-    public ResponseEntity getMoviesByDirectorName(@PathVariable("name")String name) {
+    @ResponseBody
+    public ResponseEntity getMoviesByDirectorName(@PathVariable("director")String name) {
         return new ResponseEntity(ms.getMoviesByDirectorName(name),HttpStatus.FOUND);
     }
 
@@ -48,7 +49,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/movies/delete-director-by-name")
-    public ResponseEntity deleteDirectorByName(@RequestBody String directorName) {
+    public ResponseEntity deleteDirectorByName(@RequestParam("name") String directorName) {
         return new ResponseEntity(ms.deleteDirectorByName(directorName),HttpStatus.ACCEPTED);
     }
 

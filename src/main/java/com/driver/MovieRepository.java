@@ -25,10 +25,11 @@ public class MovieRepository {
         return "Director added Successfully!";
     }
 
-    public String addMovieDirectorPair(String movieName,String directorName) {
+    public String addMovieDirectorPair(String directorName,String movieName) {
         List<String>lt = pairDB.getOrDefault(directorName,new ArrayList<>());
         lt.add(movieName);
         pairDB.put(directorName,lt);
+        System.out.println(lt);
         return "Pair added!";
     }
 
@@ -41,7 +42,8 @@ public class MovieRepository {
     }
 
     public List<String> getMoviesByDirectorName(String name) {
-        return pairDB.get(name);
+
+        return new ArrayList<>(pairDB.get(name));
     }
 
     public List<String> findAllMovies() {
@@ -58,8 +60,8 @@ public class MovieRepository {
     }
 
     public String deleteAllDirectors() {
-        for(String str : movieDB.keySet()) {
-            movieDB.remove(str);
+        for(String str : directorDB.keySet()) {
+            directorDB.remove(str);
         }
         return "Delete Successfully!";
     }
